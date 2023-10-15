@@ -97,36 +97,41 @@ Third one will be to manipulate the
 
 Part 3 SQL queries
 
+##################
 Select Distinct count(*) as counts, from_station_id , to_station_id  from 
   Dimension_D group by  to_station_id , from_station_id
   order by counts desc
 LIMIT 10
+##################
+Select distinct count(DISTINCT trip_id) as count, min(start_time), max(end_time)
+from Fact_D
+	where (start_time BETWEEN date("2019-01-16") and date("2019-05-17") ) and (end_time BETWEEN date("2019-05-16") and date("2019-05-17") )
+	order by count 
+##################
+CREATE table Merged as
+	SELECT DISTINCT  a.trip_id, b.from_station_id,b.trip_id, a.start_time,a.end_time 
+	from Fact_D as a
+	
+	inner  join Dimension_D as b on a.trip_id=b.trip_id
+	
+WHERE (a.start_time BETWEEN  date("2019-01-01") and date("2019-05-17") and a.end_time BETWEEN date("2019-01-01") and date("2019-05-17"))
+##################
+SELECT  from_station_id,count(DISTINCT(trip_id)) as count
+	from Merged
+	
+WHERE (start_time BETWEEN  date("2019-01-01") and date("2019-05-17") and end_time BETWEEN date("2019-01-01") and date("2019-05-17"))
+GROUP by from_station_id
+##################
 
-Select distinct count(*) as count, start_time, end_time,trip_id
+	SELECT  count(DISTINCT(trip_id)) as count, strftime('%m',start_time) as T
+	from Fact_D
+	
+WHERE (start_time BETWEEN  date("2019-01-01") and date("2019-12-31") and end_time BETWEEN date("2019-01-01") and date("2019-12-31"))
+GROUP by strftime('%m',start_time)
+##################
 
-where start_time= date '2019-05-16'
-and end_time = date '2019-05-16'
-order by count desc
-limit 1
-
-create table Merged as
-select  a.start_time, a.end_time, a.trip_id, b.from_station_id, count(trip_id) as counts, 
-where start_time <= date '2019-05-16'
-and end_time <= date '2019-05-16'
-from fact_d a
-inner  join dimension_d b on a.trip_id=b.trip_id
-group by b.from_station_id a.trip_id
-order by counts d
-
-Select distinct count(trip_id) as count, start_time format=yymmdd10., end_time format=yymmdd10. ,
-
-group by start_time, end_time
-order by count desc
-from fact_D
-
-Select distinct count(trip_id) as count, start_time format=monyy., end_time format=monyy. ,
-
-group by start_time, end_time
-order by count desc
-
-from Fact_d
+	SELECT  count(DISTINCT(trip_id)) as count, date(start_time) as T
+	from Fact_D
+	
+WHERE (start_time BETWEEN  date("2019-01-01") and date("2019-05-17") and end_time BETWEEN date("2019-01-01") and date("2019-05-17"))
+GROUP by date(start_time)
