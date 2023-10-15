@@ -88,15 +88,16 @@ First one will be directly getting the json file converting it in to a dict and 
 
 workflow: CREATE_TINYDB -> NOSQL_DOWNLOAD_MANIPULATION_INSERTION
 
-Second one will be to directly manipulate it with Pandas and save it as a Json you can then load it in any nosql DB.
+Second one is directly recording to json
 
-
-Third one will be to manipulate the 
+Third is using pandas.
 
 
 
 Part 3 SQL queries
 
+workflow:SQL QUERIES
+My advice is to just use dedicated software for this. I used SAS and SQLlite3 viewer
 ##################
 Select Distinct count(*) as counts, from_station_id , to_station_id  from 
   Dimension_D group by  to_station_id , from_station_id
