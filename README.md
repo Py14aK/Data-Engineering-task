@@ -60,7 +60,7 @@ using pd.to_sql + Append
 
 Worflow for scripts:
 
-GET URL LINKS-> DOWLOAD+ exctract_ZIPS -> PANDAS MANIPULATION -> PANDAS TO SQL
+GET URL LINKS-> DOWLOAD+ exctract_ZIPS -> PANDAS TO SQL-> PANDAS MANIPULATION -> Check if everything is ok
 
 This was automated to be simple scripts you run, with the exception of the Pandas manipulation. We could add some error handling but really it is best to have someone verify this step manually.
 
