@@ -127,6 +127,6 @@ from fact_D
 Select distinct count(trip_id) as count, start_time format=monyy., end_time format=monyy. ,
 
 group by start_time, end_time
-order by count deschttps://www.grammarly.com/signup?from=grammarCheck&afterSurvey=recommend
+order by count desc
 
 from Fact_d
